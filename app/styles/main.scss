@@ -1,0 +1,123 @@
+$primary-color: #000000;
+$primary-font: Arial, sans-serif;
+$light-on-dark: #ffffff;
+$highlight-color: #ffff99;
+$animation-speed: 0.5s;
+
+body {
+  font: 100% $primary-font;
+  color: $primary-color;
+  margin: 0 auto;
+  padding:0;
+}
+
+@mixin font-size($size) {
+  @media screen and (max-width: 767px) {
+    font-size: ($size * .5) + px;
+  }
+  @media screen and (min-width: 768px) {
+    font-size: ($size * .75) + px;
+  }
+  @media screen and (min-width: 1200px) {
+    font-size: $size + px;
+  }
+}
+
+header {
+  background-color:#000000;
+  color:$light-on-dark;
+  padding:15px;
+  @include font-size(48);
+
+  span {
+    float:right;
+    cursor:pointer;
+  }
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.list-item {
+  margin:0;
+  padding:25px 0;
+  width:100%;
+  box-sizing:border-box;
+
+  &.in-basket {
+    transition: background-color $animation-speed ease;
+    background-color: $highlight-color;
+  }
+
+  input {
+    box-sizing:border-box;
+    float:left;
+    padding:10px;
+    margin:0 15px;
+    outline: none; 
+  }
+    
+  .list-item-add-to-basket {
+    box-sizing:border-box;
+    float:left;
+    padding:18px;
+    margin:0 15px;
+    outline: none;
+  }
+  .list-item-remove-from-basket  {
+    box-sizing:border-box;
+    float:left;
+    outline: none;
+  }
+}
+
+@mixin list-item-info($thick, $color) {
+  border-bottom: $thick solid $color;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  &:disabled {
+    transition: background-color $animation-speed ease;
+    background-color: $highlight-color;
+    border:none;
+  }
+}
+
+.list-item-name {
+  @include list-item-info(1px, #333333); 
+  @include font-size(40);
+  width:40%;
+}
+.list-item-quantity { 
+  @include list-item-info(1px, #333333); 
+  @include font-size(40);
+  width:10%;
+}
+.list-item-add-to-basket {
+  width:20%;  
+  transition: background-color $animation-speed ease;
+  background-color: #54CC0E;
+  border:none;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  -khtml-border-radius: 10px;
+  color: $light-on-dark;
+  @include font-size(26);
+  cursor:pointer;
+
+  &.in-basket {
+    transition: background-color $animation-speed ease;
+    background-color: #abdf8d;
+    cursor:default;
+  }
+}
+.list-item-remove-from-basket {
+  width:5%;
+  margin-left:20px;
+  @include font-size(70);
+  cursor:pointer;
+}

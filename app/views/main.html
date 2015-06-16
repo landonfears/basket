@@ -1,0 +1,27 @@
+<header>Grocery List App <span ng-click="addToGroceryList()">+ Add to list</span></header>
+
+<div class="list-item clearfix" ng-repeat="basketItem in basketItems | filter:{ removed:false }" ng-class="{'in-basket': basketItem.inBasket}">
+  <form name="groceryListForm" novalidate>
+    <input class="list-item-name" 
+      type="text" required 
+      ng-model="basketItem.name" 
+      placeholder="Enter item" 
+      ng-disabled="basketItem.inBasket" />
+
+    <input class="list-item-quantity" 
+      type="number" required 
+      ng-model="basketItem.quantity" 
+      min="1" max="1000" 
+      ng-disabled="basketItem.inBasket" />
+
+    <input class="list-item-add-to-basket" 
+      type="button" ng-click="addToBasket(basketItem)" 
+      value="{{basketItem.inBasket ? 'In' : 'Add to'}} basket" 
+      ng-disabled="basketItem.inBasket || groceryListForm.$invalid" 
+      ng-class="{'in-basket': basketItem.inBasket || groceryListForm.$invalid}" />
+      
+    <div class="list-item-remove-from-basket" 
+      ng-if="basketItem.inBasket" 
+      ng-click="removeFromBasket(basketItem)">&times;</div>
+  </form>
+</div>
